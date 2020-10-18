@@ -47,4 +47,6 @@ public class DepartementServiceImpl implements IDepartementService {
 	public void deleteDepartementById(int depId) {
 		deptRepoistory.delete(deptRepoistory.findById(depId).get());	
 	}
+	
+	
 }
