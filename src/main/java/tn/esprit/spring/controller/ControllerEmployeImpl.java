@@ -19,6 +19,7 @@ import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.entities.Timesheet;
+import tn.esprit.spring.services.IContratService;
 import tn.esprit.spring.services.IEmployeService;
 
 
@@ -30,6 +31,8 @@ public class ControllerEmployeImpl  {
 
 	@Autowired
 	IEmployeService employeService;
+	@Autowired
+	IContratService contratsService;
 
 	private String login; 
 	private String password; 
@@ -185,13 +188,13 @@ public class ControllerEmployeImpl  {
 	}
 
 	public int ajouterContrat(Contrat contrat) {
-		employeService.ajouterContrat(contrat);
+		contratsService.ajouterContrat(contrat);
 		return contrat.getReference();
 	}
 
 	public void affecterContratAEmploye(int contratId, int employeId)
 	{
-		employeService.affecterContratAEmploye(contratId, employeId);
+		contratsService.affecterContratAEmploye(contratId, employeId);
 	}
 
 
@@ -204,7 +207,7 @@ public class ControllerEmployeImpl  {
 
 	}
 	public void deleteContratById(int contratId) {
-		employeService.deleteContratById(contratId);
+		contratsService.deleteContratById(contratId);
 	}
 
 	public int getNombreEmployeJPQL() {
@@ -227,7 +230,7 @@ public class ControllerEmployeImpl  {
 	}
 
 	public void deleteAllContratJPQL() {
-		employeService.deleteAllContratJPQL();
+		contratsService.deleteAllContratJPQL();
 
 	}
 

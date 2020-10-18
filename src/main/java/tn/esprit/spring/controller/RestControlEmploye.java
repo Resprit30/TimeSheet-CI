@@ -18,6 +18,7 @@ import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Timesheet;
+import tn.esprit.spring.services.IContratService;
 import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
@@ -31,7 +32,8 @@ public class RestControlEmploye {
 	IEntrepriseService ientrepriseservice;
 	@Autowired
 	ITimesheetService itimesheetservice;
-
+	@Autowired
+	IContratService contratsService;
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
 	//{"id":1,"nom":"kallel", "prenom":"khaled", "email":"Khaled.kallel@ssiiconsulting.tn", "isActif":true, "role":"INGENIEUR"}
@@ -70,7 +72,7 @@ public class RestControlEmploye {
 	@PostMapping("/ajouterContrat")
 	@ResponseBody
 	public int ajouterContrat(@RequestBody Contrat contrat) {
-		iemployeservice.ajouterContrat(contrat);
+		contratsService.ajouterContrat(contrat);
 		return contrat.getReference();
 	}
 	
@@ -78,7 +80,7 @@ public class RestControlEmploye {
    @PutMapping(value = "/affecterContratAEmploye/{idcontrat}/{idemp}") 
 	public void affecterContratAEmploye(@PathVariable("idcontrat")int contratId, @PathVariable("idemp")int employeId)
 	{
-		iemployeservice.affecterContratAEmploye(contratId, employeId);
+	   contratsService.affecterContratAEmploye(contratId, employeId);
 	}
 
 	
@@ -102,7 +104,7 @@ public class RestControlEmploye {
     @DeleteMapping("/deleteContratById/{idcontrat}") 
 	@ResponseBody
 	public void deleteContratById(@PathVariable("idcontrat")int contratId) {
-		iemployeservice.deleteContratById(contratId);
+    	contratsService.deleteContratById(contratId);
 	}
 
     
@@ -142,7 +144,7 @@ public class RestControlEmploye {
     @DeleteMapping("/deleteAllContratJPQL") 
 	@ResponseBody
 	public void deleteAllContratJPQL() {
-		iemployeservice.deleteAllContratJPQL();
+    	contratsService.deleteAllContratJPQL();
 		
 	}
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
+import tn.esprit.spring.services.IDepartementService;
 import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
@@ -20,13 +21,15 @@ public class ControllerEntrepriseImpl{
 	IEntrepriseService ientrepriseservice;
 	@Autowired
 	ITimesheetService itimesheetservice;
+	@Autowired
+	IDepartementService idepartementService;
 
 	public int ajouterEntreprise(Entreprise ssiiConsulting) {
 		ientrepriseservice.ajouterEntreprise(ssiiConsulting);
 		return ssiiConsulting.getId();
 	}
 	public void affecterDepartementAEntreprise(int depId, int entrepriseId) {
-		ientrepriseservice.affecterDepartementAEntreprise(depId, entrepriseId);
+		idepartementService.affecterDepartementAEntreprise(depId, entrepriseId);
 	}
 	public void deleteEntrepriseById(int entrepriseId)
 	{
@@ -38,7 +41,7 @@ public class ControllerEntrepriseImpl{
 	}
 	
 	public int ajouterDepartement(Departement dep) {
-		return ientrepriseservice.ajouterDepartement(dep);
+		return idepartementService.ajouterDepartement(dep);
 	}
 	
 	public List<String> getAllDepartementsNamesByEntreprise(int entrepriseId) {
@@ -46,7 +49,7 @@ public class ControllerEntrepriseImpl{
 	}
 
 	public void deleteDepartementById(int depId) {
-		ientrepriseservice.deleteDepartementById(depId);
+		idepartementService.deleteDepartementById(depId);
 
 	}
 }
