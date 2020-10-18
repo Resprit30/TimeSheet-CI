@@ -21,6 +21,7 @@ import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.services.IContratService;
 import tn.esprit.spring.services.IEmployeService;
+import tn.esprit.spring.services.ITimesheetService;
 
 
 @Scope(value = "session")
@@ -33,6 +34,8 @@ public class ControllerEmployeImpl  {
 	IEmployeService employeService;
 	@Autowired
 	IContratService contratsService;
+	@Autowired
+	ITimesheetService itimesheetservice;
 
 	private String login; 
 	private String password; 
@@ -245,7 +248,7 @@ public class ControllerEmployeImpl  {
 
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
-		return employeService.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
+		return itimesheetservice.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
 	}
 
 	public String getPrenom() {

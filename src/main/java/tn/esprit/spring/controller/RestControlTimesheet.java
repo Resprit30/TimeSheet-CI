@@ -43,7 +43,7 @@ public class RestControlTimesheet {
 	// http://localhost:8081/SpringMVC/servlet/affecterMissionADepartement/4/4
 	@PutMapping(value = "/affecterMissionADepartement/{idmission}/{iddept}") 
 	public void affecterMissionADepartement(@PathVariable("idmission") int missionId, @PathVariable("iddept") int depId) {
-		itimesheetservice.affecterMissionADepartement(missionId, depId);
+		imissionservice.affecterMissionADepartement(missionId, depId);
 	}
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterTimesheet

@@ -31,7 +31,7 @@ public class ControllerTimesheetImpl {
 	}
 
 	public void affecterMissionADepartement(int missionId, int depId) {
-		itimesheetservice.affecterMissionADepartement(missionId, depId);
+		imissionservice.affecterMissionADepartement(missionId, depId);
 
 	}
 	public void ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin) {
