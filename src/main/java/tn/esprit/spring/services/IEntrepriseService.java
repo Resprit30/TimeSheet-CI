@@ -7,8 +7,8 @@ import tn.esprit.spring.entities.Entreprise;
 
 public interface IEntrepriseService {
 	
-	public int ajouterEntreprise(Entreprise entreprise);
+	public Integer ajouterEntreprise(Entreprise entreprise);
 	List<String> getAllDepartementsNamesByEntreprise(int entrepriseId);
-	public void deleteEntrepriseById(int entrepriseId);
+	public int deleteEntrepriseById(int entrepriseId);
 	public Entreprise getEntrepriseById(int entrepriseId);
 }
