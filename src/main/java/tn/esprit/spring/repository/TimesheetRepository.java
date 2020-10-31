@@ -14,7 +14,7 @@ import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.entities.TimesheetPK;
 
 @Repository
-public interface TimesheetRepository extends CrudRepository<Timesheet, Integer> {
+public interface TimesheetRepository extends CrudRepository<Timesheet, TimesheetPK> {
 
 	@Query("select DISTINCT m from Mission m join m.timesheets t join t.employe e where e.id=:employeId")
 	public List<Mission> findAllMissionByEmployeJPQL(@Param("employeId")int employeId);
@@ -33,5 +33,6 @@ public interface TimesheetRepository extends CrudRepository<Timesheet, Integer> 
 				+ "t.timesheetPK.dateFin<=:dateF")
 	public List<Timesheet> getTimesheetsByMissionAndDate(@Param("emp")Employe employe, @Param("mis")Mission mission, @Param("dateD")Date dateDebut,@Param("dateF")Date dateFin);
 
-	  public Timesheet findBytimesheetPK(TimesheetPK timesheetPK);
+	 //public Timesheet findBytimesheetPK(TimesheetPK timesheetPK);
+	  public Timesheet findByTimesheetPK(TimesheetPK pk);
 }

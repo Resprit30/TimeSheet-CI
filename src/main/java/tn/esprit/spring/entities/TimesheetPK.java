@@ -29,7 +29,7 @@ public class TimesheetPK implements Serializable {
 	}
 	
 	public TimesheetPK(int idMission, int idEmploye, Date dateDebut, Date dateFin) {
-		super();
+		
 		this.idMission = idMission;
 		this.idEmploye = idEmploye;
 		this.dateDebut = dateDebut;
