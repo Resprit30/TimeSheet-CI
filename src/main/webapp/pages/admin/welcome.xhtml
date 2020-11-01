@@ -23,9 +23,9 @@
 
 		<h:panelGroup columns="2">
 			<h:form>
-				<table>
+				<table >
 					<tr>
-						<td><h:outputText value="Login (Email)"></h:outputText></td>
+						<th><h:outputText value="Login (Email)"></h:outputText></th>
 						<td>
 <h:inputText id="validateMail" required="true" validatorMessage="Le format du mail est invalide!" requiredMessage="Mail obligatoire!" value="#{employeController.email}">
 <f:validateRegex pattern=".+\@.+\..+" /> 
