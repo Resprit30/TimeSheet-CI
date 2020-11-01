@@ -4,8 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.apache.log4j.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ import tn.esprit.spring.repository.TimesheetRepository;
 @Service
 public class TimesheetServiceImpl implements ITimesheetService {
 	
-	private static final Logger logger = Logger.getLogger(TimesheetServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(TimesheetServiceImpl.class);
 	@Autowired
 	MissionRepository missionRepository;
 	@Autowired

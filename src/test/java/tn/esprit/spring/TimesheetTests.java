@@ -9,7 +9,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.entities.Timesheet;
-import tn.esprit.spring.entities.TimesheetPK;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.repository.MissionRepository;
 import tn.esprit.spring.repository.TimesheetRepository;
@@ -29,15 +29,14 @@ import tn.esprit.spring.services.EmployeServiceImpl;
 import tn.esprit.spring.services.IDepartementService;
 import tn.esprit.spring.services.IMissionService;
 import tn.esprit.spring.services.ITimesheetService;
-import tn.esprit.spring.services.TimesheetServiceImpl;
 
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TimesheetTests {
+	private static final Logger logger = LogManager.getLogger(TimesheetTests.class);
 
-	private static final Logger logger = Logger.getLogger(TimesheetTests.class);
 	@Autowired
 	private EmployeServiceImpl employeServiceImpl;
 	@Autowired
@@ -93,13 +92,13 @@ public class TimesheetTests {
 	}
 	
 	
-	@Test 
-	public void validation () throws ParseException{
-	//timesheetService.validerTimesheet(2, 3,format.parse("2020/09/03"), format.parse("2020/10/01"),2);
-		TimesheetPK timesheetPK = new TimesheetPK(2, 2, format.parse("2020/10/31"), format.parse("2020/11/29"));
-		Optional<Timesheet> timesheet =timesheetRepository.findById(timesheetPK);
-		System.out.println(timesheet);
-	//affichage();
-	}
+//	@Test 
+//	public void validation () throws ParseException{
+//	//timesheetService.validerTimesheet(2, 3,format.parse("2020/09/03"), format.parse("2020/10/01"),2);
+//		TimesheetPK timesheetPK = new TimesheetPK(2, 2, format.parse("2020/10/31"), format.parse("2020/11/29"));
+//		Optional<Timesheet> timesheet =timesheetRepository.findById(timesheetPK);
+//		System.out.println(timesheet);
+//	//affichage();
+//	}
 	
 }

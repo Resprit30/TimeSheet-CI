@@ -75,12 +75,7 @@
 			<artifactId>rewrite-servlet</artifactId>
 			<version>3.4.1.Final</version>
 		</dependency>
-		<dependency>
-  <groupId>junit</groupId>
-  <artifactId>junit</artifactId>
-  <version>4.11</version>
-  <scope>test</scope>
-</dependency>
+
 		<dependency>
 		
 			<groupId>org.ocpsoft.rewrite</groupId>
