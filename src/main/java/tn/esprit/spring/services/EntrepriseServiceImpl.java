@@ -40,13 +40,19 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		l.debug("methode getAllDepartementsNamesByEntreprise ");
 		List<String> depNames = new ArrayList<>();
 		try {
-			Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).isPresent() ? entrepriseRepoistory.findById(entrepriseId).get(): null;
+			Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).orElse(null);
 			
+			if(entrepriseManagedEntity!=null && entrepriseManagedEntity.getDepartements()!=null){
 			for(Departement dep : entrepriseManagedEntity.getDepartements()){
 				depNames.add(dep.getName());
 			}
 			l.debug("getAllDepartementsNamesByEntreprise fini avec succes ");
 			return depNames;
+			}
+			else {
+				l.error("erreur methode getAllDepartementsNamesByEntreprise : " );
+				return null;
+			}
 		} catch (Exception e) {
 			l.error("erreur methode getAllDepartementsNamesByEntreprise : " +e);
 			return null;
@@ -58,7 +64,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		l.debug("methode deleteEntrepriseById ");
 		
 		try {
-			entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());
+			entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).orElse(null));
 			l.debug("deleteEntrepriseById fini avec succes ");
 			return 0;
 		} catch (Exception e) {
@@ -72,7 +78,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		
 		
 		try {
-			Entreprise et= entrepriseRepoistory.findById(entrepriseId).get();
+			Entreprise et= entrepriseRepoistory.findById(entrepriseId).orElse(null);
 			l.debug("getEntrepriseById fini avec succes ");
 			return et;
 		} catch (Exception e) {

@@ -37,10 +37,11 @@ public class MissionServiceImpl implements IMissionService {
 	}
 	
 	public void affecterMissionADepartement(int missionId, int depId) {
-		Mission mission = missionRepository.findById(missionId).get();
-		Departement dep = deptRepoistory.findById(depId).get();
+		Mission mission = missionRepository.findById(missionId).orElse(null);
+		Departement dep = deptRepoistory.findById(depId).orElse(null);
+		if(mission!=null && dep !=null){
 		mission.setDepartement(dep);
-		missionRepository.save(mission);
+		missionRepository.save(mission);}
 		
 	}
 }
