@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Pattern;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,8 +31,6 @@ public class Employe implements Serializable {
 	
 	private String nom;
 	
-	//@Column(unique=true)
-	//@Pattern(regex=".+\@.+\..+")
 	private String email;
 
 	private String password;
@@ -40,22 +38,19 @@ public class Employe implements Serializable {
 	private boolean actif;
 	
 	@Enumerated(EnumType.STRING)
-	//@NotNull
 	private Role role;
 	
-	//@JsonBackReference  
 	@JsonIgnore
 	@ManyToMany(mappedBy="employes",fetch=FetchType.EAGER )
-	//@NotNull
 	private List<Departement> departements;
 	
 	@JsonIgnore
-	//@JsonBackReference
+
 	@OneToOne(mappedBy="employe")
 	private Contrat contrat;
 	
 	@JsonIgnore
-	//@JsonBackReference
+	
 	@OneToMany(mappedBy="employe")
 	private List<Timesheet> timesheets;
 	
@@ -63,20 +58,6 @@ public class Employe implements Serializable {
 	public Employe() {
 		super();
 	}
-	
-		
-	public Employe(int id, String prenom, String nom, String email, String password, boolean actif, Role role) {
-		super();
-		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
-		this.email = email;
-		this.password = password;
-		this.actif = actif;
-		this.role = role;
-	}
-
-
 
 	public Employe(String nom, String prenom, String email, String password, boolean actif, Role role) {
 		this.nom = nom;
@@ -87,16 +68,9 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 	
-	public Employe(String nom, String prenom, String email, boolean actif, Role role) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.actif = actif;
-		this.role = role;
-	}
 	
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {
@@ -104,7 +78,7 @@ public class Employe implements Serializable {
 	}
 
 	public String getPrenom() {
-		return prenom;
+		return this.prenom;
 	}
 
 	public void setPrenom(String prenom) {
@@ -112,7 +86,7 @@ public class Employe implements Serializable {
 	}
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public void setNom(String nom) {
@@ -120,11 +94,11 @@ public class Employe implements Serializable {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 	 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
  
 	public void setPassword(String password) {
@@ -139,7 +113,7 @@ public class Employe implements Serializable {
 
 
 	public boolean isActif() {
-		return actif;
+		return this.actif;
 	}
 
 
@@ -149,7 +123,7 @@ public class Employe implements Serializable {
 
 
 	public Role getRole() {
-		return role;
+		return this.role;
 	}
 
 	public void setRole(Role role) {
@@ -157,7 +131,7 @@ public class Employe implements Serializable {
 	}
 
 	public List<Departement> getDepartements() {
-		return departements;
+		return this.departements;
 	}
 
 	public void setDepartements(List<Departement> departement) {
@@ -165,7 +139,7 @@ public class Employe implements Serializable {
 	}
 
 	public Contrat getContrat() {
-		return contrat;
+		return this.contrat;
 	}
 
 	public void setContrat(Contrat contrat) {
@@ -173,7 +147,7 @@ public class Employe implements Serializable {
 	}
 
 	public List<Timesheet> getTimesheets() {
-		return timesheets;
+		return this.timesheets;
 	}
 
 	public void setTimesheets(List<Timesheet> timesheets) {

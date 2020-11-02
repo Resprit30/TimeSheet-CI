@@ -2,6 +2,7 @@ package tn.esprit.spring;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -23,11 +24,11 @@ public class EntrepriseServiceImplTest {
 	@Autowired
     EntrepriseRepository entrepriseRepoistory;
 	
-	Integer idE=4;
+	Integer idE;
 	
 	
 	@Test
-	public void testajouterEntreprise()  {      
+	public void testAjouterEntreprise()  {      
 		 idE=ientrepriseservice.ajouterEntreprise(new Entreprise("test_nom_entreprise","test_raison_sociale "));
 		assertNotNull(idE);
 	}
@@ -39,7 +40,7 @@ public class EntrepriseServiceImplTest {
 	}
 	
 	@Test
-	public void testgetAllDepartementsNamesByEntreprise() {
+	public void testGetAllDepartementsNamesByEntreprise() {
 		
 		List<String> depNames = ientrepriseservice.getAllDepartementsNamesByEntreprise(1);
 		assertNotNull(depNames);
@@ -49,12 +50,16 @@ public class EntrepriseServiceImplTest {
 	
 	
 	@Test
-	public void testdeleteEntrepriseById()
+	public void testDeleteEntrepriseById()
 	{
-		
+		if(idE!=null){
 		int i = ientrepriseservice.deleteEntrepriseById(idE);
 		
-		assertEquals(0, i);
+		assertEquals(0, i);}
+		else {
+			int i = ientrepriseservice.deleteEntrepriseById(6);
+			
+			assertEquals(0, i);}
 	}
 	
 	

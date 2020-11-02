@@ -51,11 +51,11 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 			}
 			else {
 				l.error("erreur methode getAllDepartementsNamesByEntreprise : " );
-				return null;
+				return depNames;
 			}
 		} catch (Exception e) {
 			l.error("erreur methode getAllDepartementsNamesByEntreprise : " +e);
-			return null;
+			return depNames;
 		}
 	}
 
@@ -64,9 +64,13 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		l.debug("methode deleteEntrepriseById ");
 		
 		try {
+			if(entrepriseRepoistory.findById(entrepriseId).orElse(null)!=null){
 			entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).orElse(null));
 			l.debug("deleteEntrepriseById fini avec succes ");
-			return 0;
+			return 0;}else {
+				l.error("erreur methode deleteEntrepriseById : " );
+				return -1;
+			}
 		} catch (Exception e) {
 			l.error("erreur methode deleteEntrepriseById : " +e);
 			return -1;
