@@ -87,19 +87,54 @@ public class DepartementServiceImpl implements IDepartementService {
 		return null ; 
 	}
 	
+	@Transactional
+	public Departement desaffecterDepartementDuEntreprise (int depId , int entId){
+		try {
+			l.info("In desaffecterDepartementDuEntreprise :  ");
+			Entreprise ent = entrepriseRepoistory.findById(entId).get();
+			l.info("get ent ");
+			Departement depManagedEntity = deptRepoistory.findById(depId).get();
+			l.info("get depManagedEntity ");
+			
+			 if (depManagedEntity.getEntreprise() == ent )
+			 {
+				 l.info("In if.. ");
+				 depManagedEntity.setEntreprise(null);
+				
+				 l.info("Removed. ");
+			 }
+			
+			
+			
+			
+			
+			l.info("Out of desaffecterDepartementDuEntreprise.  ");
+			return depManagedEntity ;
+		
+			
+		}catch (Exception e) {
+			l.error("erreur In affecterDepartementAEntreprise() : Failed to affect " + e);
+			return null ; 
+		
+			}
+		
+	}
+	
 	
 	@Override
 	public Departement getDepartmentById(int departmentId) {
 		try {
 			l.info(" In getDepartementById() : ");
 			l.info("departement : " + departmentId );
-		return  deptRepoistory.findById(departmentId).get();
+			Departement dep =  deptRepoistory.findById(departmentId).get();
+			l.info(" Out of getDepartementById(). ");
+		return dep ; 
 		} catch (Exception e) {
-			l.error("get departement operation failed");	
+			l.error("get departement operation failed");
+			return null;
 		}
-		l.info(" Out of getDepartementById(). ");
-		return null;
-	}
+		
+		}
 	
 	@Transactional
 	public void deleteDepartementById(int depId) {
@@ -108,14 +143,17 @@ public class DepartementServiceImpl implements IDepartementService {
 		  
 		  l.info(" department id= " + depId);
 		  
+		
 		  deptRepoistory.delete(deptRepoistory.findById(depId).get());
 		
 		  l.info("Out of deleteDepartmentById.  ");
+		 
 		  
 		} 
 		catch (Exception e) {
 			
-			l.error("erreur In deleteDepartementById() : could not be found " + e); }
+			l.error("erreur In deleteDepartementById() : could not be found " + e); 
+			 }
 	}
 		
 	
