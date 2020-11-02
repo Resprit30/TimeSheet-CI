@@ -1,6 +1,8 @@
 package tn.esprit.spring;
 
 
+import static org.junit.Assert.assertNotNull;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,17 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import tn.esprit.spring.entities.Departement;
-import tn.esprit.spring.entities.Employe;
-import tn.esprit.spring.entities.Mission;
-import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.repository.MissionRepository;
 import tn.esprit.spring.repository.TimesheetRepository;
-import tn.esprit.spring.services.EmployeServiceImpl;
-import tn.esprit.spring.services.IDepartementService;
-import tn.esprit.spring.services.IMissionService;
 import tn.esprit.spring.services.ITimesheetService;
 
 
@@ -36,14 +31,10 @@ import tn.esprit.spring.services.ITimesheetService;
 public class TimesheetTests {
 	private static final Logger logger = LogManager.getLogger(TimesheetTests.class);
 
-	@Autowired
-	private EmployeServiceImpl employeServiceImpl;
-	@Autowired
-	private IMissionService mission;
+
 	@Autowired
 	private ITimesheetService timesheetService;
-	@Autowired
-	private IDepartementService depService;
+	
 	@Autowired 
 	private MissionRepository missionRepository;
 	@Autowired
@@ -56,20 +47,9 @@ public class TimesheetTests {
 	@Test
 	public void alimentation() throws ParseException { 
 
-		
-		Mission m=new Mission("Managment", "description");
-		Employe employe = new Employe("Rihab","Ben Mansour","rihab.benmansour@esprit.tn","",true,Role.CHEF_DEPARTEMENT);
-		Departement dep=new Departement("Conception");
-		
-		
-//		depService.ajouterDepartement(dep);
-//		m.setDepartement(dep);
-//		
-//		employeServiceImpl.addOrUpdateEmploye(employe);
-	//	missionRepository.save(m);
 	
-		Date datedeb=format.parse("2020/09/03");
-		Date datefin=format.parse("2021/10/01");
+		//Date datedeb=format.parse("2020/09/03");
+		//Date datefin=format.parse("2021/10/01");
 		//timesheetService.ajouterTimesheet(3, 2,datedeb, datefin);
 	
 	}
@@ -81,7 +61,8 @@ public class TimesheetTests {
 		Long num=timesheetRepository.count();
 		logger.info("there are "+num.intValue() +" timesheets in total");
 	List<Timesheet> lt=timesheetService.getTimesheetsByMissionAndDate(employeRepository.findById(1).get(), missionRepository.findById(1).get(), format.parse("2020/00/00"), format.parse("2021/00/00"));
-		for (Timesheet t:lt)
+	assertNotNull(lt);
+	for (Timesheet t:lt)
 	{String valide="NOT VALID";
 	i++;
 	if (t.isValide())

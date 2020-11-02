@@ -2,14 +2,12 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.Cascade;
 
 @Entity
 public class Timesheet implements Serializable{

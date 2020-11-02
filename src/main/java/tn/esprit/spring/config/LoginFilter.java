@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -14,6 +15,21 @@ import tn.esprit.spring.controller.ControllerEmployeImpl;
 
 
 public class LoginFilter implements Filter {
+
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+	
+		
+	}
+
+	@Override
+	public void destroy() {
+	
+		
+	}
+
+
+
 
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -29,6 +45,11 @@ public class LoginFilter implements Filter {
 		
 		else {httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login.jsf" );}
 	}
+
+	
+
+	
+	
 
 	
 

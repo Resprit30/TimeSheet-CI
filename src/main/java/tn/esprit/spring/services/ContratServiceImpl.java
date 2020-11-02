@@ -29,9 +29,9 @@ public class ContratServiceImpl implements IContratService {
 		return contrat.getReference();
 	}
 
-	public void affecterContratAEmploye(int contratId, int employeId) {
-		Contrat contratManagedEntity = contratRepository.findById(contratId).get();
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+	public void affecterContratAEmploye(int contratId, int employeId)  {
+		Contrat contratManagedEntity = contratRepository.findById(contratId).orElse(null);
+		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
 
 		contratManagedEntity.setEmploye(employeManagedEntity);
 		contratRepository.save(contratManagedEntity);
@@ -39,7 +39,7 @@ public class ContratServiceImpl implements IContratService {
 	}
 
 public void deleteContratById(int contratId) {
-		Contrat contratManagedEntity = contratRepository.findById(contratId).get();
+		Contrat contratManagedEntity = contratRepository.findById(contratId).orElse(null);
 		contratRepository.delete(contratManagedEntity);
 
 	}

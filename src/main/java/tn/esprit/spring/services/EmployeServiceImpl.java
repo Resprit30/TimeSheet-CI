@@ -43,7 +43,7 @@ public class EmployeServiceImpl implements IEmployeService {
 
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
-		Employe employe = employeRepository.findById(employeId).get();
+		Employe employe = employeRepository.findById(employeId).orElse(null);
 		employe.setEmail(email);
 		employeRepository.save(employe);
 
@@ -51,8 +51,8 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	@Transactional	
 	public void affecterEmployeADepartement(int employeId, int depId) {
-		Departement depManagedEntity = deptRepoistory.findById(depId).get();
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+		Departement depManagedEntity = deptRepoistory.findById(depId).orElse(null);
+		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
 
 		if(depManagedEntity.getEmployes() == null){
 
@@ -64,39 +64,35 @@ public class EmployeServiceImpl implements IEmployeService {
 			depManagedEntity.getEmployes().add(employeManagedEntity);
 		}
 
-		// à ajouter? 
+	
 		deptRepoistory.save(depManagedEntity); 
 
 	}
 	@Transactional
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
-		Departement dep = deptRepoistory.findById(depId).get();
+		Departement dep = deptRepoistory.findById(depId).orElse(null);
 
 		int employeNb = dep.getEmployes().size();
 		for(int index = 0; index < employeNb; index++){
 			if(dep.getEmployes().get(index).getId() == employeId){
 				dep.getEmployes().remove(index);
-				break;//a revoir
+				break;
 			}
 		}
 	} 
-	
-	// Tablesapce (espace disque) 
 
 	
 	public String getEmployePrenomById(int employeId) {
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
 		return employeManagedEntity.getPrenom();
 	}
 	 
 	public void deleteEmployeById(int employeId)
 	{
-		Employe employe = employeRepository.findById(employeId).get();
+		Employe employe = employeRepository.findById(employeId).orElse(null);
 
-		//Desaffecter l'employe de tous les departements
-		//c'est le bout master qui permet de mettre a jour
-		//la table d'association
+		
 		for(Departement dep : employe.getDepartements()){
 			dep.getEmployes().remove(employe);
 		}

@@ -33,6 +33,6 @@ public interface TimesheetRepository extends CrudRepository<Timesheet, Timesheet
 				+ "t.timesheetPK.dateFin<=:dateF")
 	public List<Timesheet> getTimesheetsByMissionAndDate(@Param("emp")Employe employe, @Param("mis")Mission mission, @Param("dateD")Date dateDebut,@Param("dateF")Date dateFin);
 
-	 //public Timesheet findBytimesheetPK(TimesheetPK timesheetPK);
+	 
 	  public Timesheet findByTimesheetPK(TimesheetPK pk);
 }
