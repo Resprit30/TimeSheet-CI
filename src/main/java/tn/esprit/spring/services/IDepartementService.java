@@ -13,7 +13,7 @@ public interface IDepartementService {
 	public Departement affecterDepartementAEntreprise(int depId, int entrepriseId);
 	public Departement desaffecterDepartementDuEntreprise (int depId , int entId);
 	public Departement getDepartmentById(int departmentId);
-	public void deleteDepartementById(int depId);
+	public int deleteDepartementById(int depId);
 
 
 	

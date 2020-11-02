@@ -137,22 +137,25 @@ public class DepartementServiceImpl implements IDepartementService {
 		}
 	
 	@Transactional
-	public void deleteDepartementById(int depId) {
+	public int deleteDepartementById(int depId) {
 		try {
 		  l.info("In deleteDepartmentById  :  ");
 		  
 		  l.info(" department id= " + depId);
 		  
-		
+		  if (deptRepoistory.findById(depId).get() != null )
+		  {		
 		  deptRepoistory.delete(deptRepoistory.findById(depId).get());
 		
 		  l.info("Out of deleteDepartmentById.  ");
+		  return 0;}
+		  else { return -1; }
 		 
-		  
 		} 
 		catch (Exception e) {
 			
 			l.error("erreur In deleteDepartementById() : could not be found " + e); 
+			return -1 ;
 			 }
 	}
 		
