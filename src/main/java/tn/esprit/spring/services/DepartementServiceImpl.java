@@ -25,13 +25,13 @@ public class DepartementServiceImpl implements IDepartementService {
 	
 	public List<Departement> getAllDepartements() {
 		l.info("In getAllDepartements : ");
-		List<Departement> Departements = (List<Departement>) deptRepoistory.findAll();
-		for (Departement departement : Departements )
+		List<Departement> depA = (List<Departement>) deptRepoistory.findAll();
+		for (Departement departement : depA )
 		{
 			l.info("departement +++ : " + departement);
 		}
 		l.info("Out of getAllDepartements. ");
-		return Departements;
+		return depA;
 	}
 
 	public Departement ajouterDepartement(Departement dep) {
@@ -43,8 +43,8 @@ public class DepartementServiceImpl implements IDepartementService {
 			}
 	   catch (Exception e ) {
 		   l.error("erreur dans ajouterDepartement() : " + e); 
-		   Departement depVide = new Departement ();
-		   return depVide ;}
+		   
+		   return null;}
 	}
 	
 	public Departement affecterDepartementAEntreprise(int depId, int entrepriseId) {
@@ -117,12 +117,12 @@ public class DepartementServiceImpl implements IDepartementService {
 		}
 
 
-			@Override
+			
 				public Departement getDepartmentById(int departmentId) {
 					try {
 							l.info(" In getDepartementById() : ");
-							l.info("departement : " + departmentId );
-							Departement dep =  deptRepoistory.findById(departmentId).get();
+							
+							Departement dep =  deptRepoistory.findById(departmentId).orElse(null);
 							l.info(" Out of getDepartementById(). ");
 							return dep ; 
 					} catch (Exception e) {
@@ -140,8 +140,8 @@ public class DepartementServiceImpl implements IDepartementService {
 			  l.info("In deleteDepartmentById  :  ");
 			  
 			  l.info(" department id= " + depId);
-			  
-			  if (deptRepoistory.findById(depId).get() != null )
+			  Departement depA = deptRepoistory.findById(depId).orElse(null);
+			  if (depA != null )
 			  {		
 		deptRepoistory.delete(deptRepoistory.findById(depId).orElse(null));	
 		 l.info("Out of deleteDepartmentById.  ");
