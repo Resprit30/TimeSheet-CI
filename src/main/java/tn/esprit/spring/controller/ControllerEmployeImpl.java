@@ -55,8 +55,6 @@ public class ControllerEmployeImpl  {
 	private Integer employeIdToBeUpdated; 
 
 
-
-
 	public String doLogout()
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
