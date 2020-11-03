@@ -1,46 +1,52 @@
 package tn.esprit.spring;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 import java.util.List;
 
-
-import static org.junit.Assert.*;
-
 import org.junit.Test;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-//import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.entities.Contrat;
+import tn.esprit.spring.entities.Employe;
+import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.IContratService;
 
-public class ContratServiceImplTest extends TimesheetApplicationTests{
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ContratServiceImplTest {
 	@Autowired
 	IContratService cs;
-
-	Integer idC=1;
-	
-	private static final Logger l = LogManager.getLogger(ContratServiceImplTest.class);
-	
+	@Autowired
+	EmployeRepository employeRepository;
 	@Test
 	public void testGetAllContrats(){
 		List<Contrat> lc =cs.getAllContrats();
-		lc.forEach(e->l.info(e+"\n"));	
+		assertNotNull(lc);
 	}
 	
 	@Test
 	public void testAjouterContrat() {
 		Date date = new Date();
 		Contrat c=new Contrat(date,"Stage",2000);
-		idC=cs.ajouterContrat(c);
+		Integer idC=cs.ajouterContrat(c);
 		assertNotNull(idC);
 	}
 	
 	@Test
 	public void testDeleteContratById() {
+		int idC = 5;
 		int i=cs.deleteContratById(idC);
 		assertEquals(0,i);
+		
 	}
+	
+
 	
 }
