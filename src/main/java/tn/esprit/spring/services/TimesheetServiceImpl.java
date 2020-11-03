@@ -1,9 +1,15 @@
 package tn.esprit.spring.services;
 
+
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Departement;
@@ -16,11 +22,11 @@ import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.repository.MissionRepository;
 import tn.esprit.spring.repository.TimesheetRepository;
-
+@Component
 @Service
 public class TimesheetServiceImpl implements ITimesheetService {
 	
-
+	private static final Logger logger = LogManager.getLogger(TimesheetServiceImpl.class);
 	@Autowired
 	MissionRepository missionRepository;
 	@Autowired
@@ -29,9 +35,6 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	TimesheetRepository timesheetRepository;
 	@Autowired
 	EmployeRepository employeRepository;
-	
-	
-    
 	
 
 	public void ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin) {
@@ -43,13 +46,15 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		Timesheet timesheet = new Timesheet();
 		timesheet.setTimesheetPK(timesheetPK);
-		timesheet.setValide(false); //par defaut non valide
+		timesheet.setValide(false); 
 		timesheetRepository.save(timesheet);
 		
 	}
 
 	
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
+		logger.info("In valider Timesheet");
+
 		
 		Employe validateur = employeRepository.findById(validateurId).orElse(null);
 		Mission mission = missionRepository.findById(missionId).orElse(null);
@@ -58,7 +63,6 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 			return;
 		}
-		//verifier s'il est le chef de departement de la mission en question
 		boolean chefDeLaMission = false;
 		if(validateur!=null && validateur.getDepartements()!=null )
 		for(Departement dep : validateur.getDepartements()){
@@ -68,20 +72,24 @@ public class TimesheetServiceImpl implements ITimesheetService {
 			}
 		}
 		if(!chefDeLaMission){
-			
+			logger.info("l'employe doit etre chef de departement de la mission en question");
+
 			return;
 		}
 //
 		TimesheetPK timesheetPK = new TimesheetPK(missionId, employeId, dateDebut, dateFin);
-		Timesheet timesheet =timesheetRepository.findBytimesheetPK(timesheetPK);
-		timesheet.setValide(true);
+		Timesheet timesheet =timesheetRepository.findByTimesheetPK(timesheetPK);
+			timesheet.setValide(true);
 		
-		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		logger.info("dateDebut : " , dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
+
 		
 	}
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
-		return timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
+
+		return (timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin));
 	}
 
 	

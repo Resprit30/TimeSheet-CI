@@ -28,7 +28,7 @@ public class TimesheetPK implements Serializable {
 	}
 	
 	public TimesheetPK(int idMission, int idEmploye, Date dateDebut, Date dateFin) {
-		super();
+		
 		this.idMission = idMission;
 		this.idEmploye = idEmploye;
 		this.dateDebut = dateDebut;
@@ -67,8 +67,8 @@ public class TimesheetPK implements Serializable {
 			return false;
 		if (idEmploye != other.idEmploye)
 			return false;
-		
-			return idMission != other.idMission ? false : true;
+		return idMission != other.idMission ? false : true;
+
 		
 	}
 
