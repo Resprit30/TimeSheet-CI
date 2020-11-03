@@ -61,6 +61,22 @@ public class ContratServiceImpl implements IContratService {
 	}
 
 public int deleteContratById(int contratId) {
+		l.debug("In deleteContratById ");
+		try {
+			if (contratRepository.findById(contratId).orElse(null) != null) {
+				contratRepository.delete(contratRepository.findById(contratId).orElse(null));
+				return 0;
+			} else {
+				l.error("erreur methode deleteContratById : ");
+				return -1;
+			}
+
+		} catch (Exception e) {
+			l.error("erreur methode deleteContratById :" + e);
+			return -1;
+
+		}
+	/*public int deleteContratById(int contratId) {
     l.debug("In deleteContratById ");
     try {
     	Contrat contratManagedEntity = contratRepository.findById(contratId).get();
@@ -73,6 +89,7 @@ public int deleteContratById(int contratId) {
     	
     }
 
+	}*/
 	}
 	public void deleteAllContratJPQL() {
 		l.debug("In deleteAllContratJPQL ");
