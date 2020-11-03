@@ -47,17 +47,28 @@ public class ContratServiceImpl implements IContratService {
 		}
 	}
 
-	public void affecterContratAEmploye(int contratId, int employeId) {
-		Contrat contratManagedEntity = contratRepository.findById(contratId).orElse(null);
-		l.debug("Contrat par identifiant");
-		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
-		l.debug("Employe par identifiant");
-		
-		if(contratManagedEntity!=null){
-		contratManagedEntity.setEmploye(employeManagedEntity);
-		l.info("L'affectation a été faite");
-		contratRepository.save(contratManagedEntity);
+	public Contrat affecterContratAEmploye(int contratId, int employeId) {
+		try {
+			l.info("In affecterContratAEmploye : ");
+			Contrat contratManagedEntity = contratRepository.findById(contratId).orElse(null);
+			l.debug("Contrat par identifiant");
+			Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
+			l.debug("Employe par identifiant");
+
+			if (contratManagedEntity != null) {
+				l.debug("In If ");
+				contratManagedEntity.setEmploye(employeManagedEntity);
+				l.info("L'affectation a été faite");
+				Contrat c = contratRepository.save(contratManagedEntity);
+				l.info("Out of affecterContratAEmploye ");
+				return c;
+			}
+			return null;
+		} catch (Exception e) {
+			l.error("erreur In affecterContratAEmploye() : Failed to affect " + e);
+			return null;
 		}
+
 	}
 
 public int deleteContratById(int contratId) {
