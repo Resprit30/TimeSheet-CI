@@ -87,20 +87,7 @@ public int deleteContratById(int contratId) {
 			return -1;
 
 		}
-	/*public int deleteContratById(int contratId) {
-    l.debug("In deleteContratById ");
-    try {
-    	Contrat contratManagedEntity = contratRepository.findById(contratId).get();
-    	l.info("Ce contrat a été supprimer avec succes");
-		contratRepository.delete(contratManagedEntity);
-		return 0;
-    }catch (Exception e){
-    	l.error("erreur methode deleteContratById :"+e);
-    	return -1;
-    	
-    }
 
-	}*/
 	}
 	public void deleteAllContratJPQL() {
 		l.debug("In deleteAllContratJPQL ");
