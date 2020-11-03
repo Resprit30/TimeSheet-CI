@@ -14,8 +14,8 @@ public interface IEmployeService {
 	
 	
 	public String getEmployePrenomById(int employeId);
-	public void deleteEmployeById(int employeId);
-	
+	public int deleteEmployeById(int employeId);
+	public Employe getEmployeeById(int employeId);
 	public int getNombreEmployeJPQL();
 	public List<String> getAllEmployeNamesJPQL();
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise);
@@ -26,7 +26,7 @@ public interface IEmployeService {
 	public List<Employe> getAllEmployes();
 	
 
-	int addOrUpdateEmploye(Employe employe);
+	Integer addOrUpdateEmploye(Employe employe);
 	
 	
 	
