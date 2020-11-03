@@ -58,14 +58,13 @@ public class EmployeServiceImpl implements IEmployeService {
 			List<Employe> employes = new ArrayList<>();
 			employes.add(employeManagedEntity);
 			depManagedEntity.setEmployes(employes);
-		}
-		else
+		}else{
 
 			depManagedEntity.getEmployes().add(employeManagedEntity);
-		
+		}
 
 		deptRepoistory.save(depManagedEntity); 
-		}
+}
 	}
 	@Transactional
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)

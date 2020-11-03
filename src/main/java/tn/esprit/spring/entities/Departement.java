@@ -27,7 +27,6 @@ public class Departement implements Serializable {
 
 	 
 	@JsonIgnore
-
 	@ManyToMany
 	private List<Employe> employes;
 	

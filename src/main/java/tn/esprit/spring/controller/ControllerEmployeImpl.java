@@ -36,7 +36,7 @@ public class ControllerEmployeImpl  {
 	IContratService contratsService;
 	@Autowired
 	ITimesheetService itimesheetservice;
-String url="/login.xhtml?faces-redirect=true";
+
 	private String login; 
 	private String password; 
 	private Boolean loggedIn;
@@ -48,6 +48,8 @@ String url="/login.xhtml?faces-redirect=true";
 	private boolean actif;
 	private Role role;  
 	
+	
+	private String nav="/login.xhtml?faces-redirect=true";
 	public Role[] getRoles() { return Role.values(); }
 
 	private List<Employe> employes; 
@@ -59,15 +61,16 @@ String url="/login.xhtml?faces-redirect=true";
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	
-	return url;
+
 	
 
+	return nav;
 	}
 
 
 	public String addEmploye() {
 
-		if (authenticatedUser==null || !loggedIn) return url;
+		if (authenticatedUser==null || !loggedIn) return nav;
 
 		employeService.addOrUpdateEmploye(new Employe(nom, prenom, email, password, actif, role)); 
 		return "null"; 
@@ -76,7 +79,7 @@ String url="/login.xhtml?faces-redirect=true";
 	public String removeEmploye(int employeId) {
 
 		
-		if (authenticatedUser==null || !loggedIn) return url;
+		if (authenticatedUser==null || !loggedIn) return nav;
 
 		employeService.deleteEmployeById(employeId);
 		return null; 
@@ -85,7 +88,7 @@ String url="/login.xhtml?faces-redirect=true";
 	public String displayEmploye(Employe empl) 
 	{
 
-		if (authenticatedUser==null || !loggedIn) return url;
+		if (authenticatedUser==null || !loggedIn) return nav;
 
 
 
@@ -104,7 +107,7 @@ String url="/login.xhtml?faces-redirect=true";
 	public String updateEmploye() 
 	{ 
 		
-		if (authenticatedUser==null || !loggedIn) return url;
+		if (authenticatedUser==null || !loggedIn) return nav;
 
 
 		Employe e=new Employe( nom, prenom, email, password, actif, role);

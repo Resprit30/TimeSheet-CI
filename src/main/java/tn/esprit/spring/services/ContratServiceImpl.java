@@ -30,11 +30,11 @@ public class ContratServiceImpl implements IContratService {
 	}
 
 
-	public void affecterContratAEmploye(int contratId, int employeId)  {
-
+	public void affecterContratAEmploye(int contratId, int employeId) {
 		Contrat contratManagedEntity = contratRepository.findById(contratId).orElse(null);
 		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
 
+	
 		if(contratManagedEntity!=null){
 		contratManagedEntity.setEmploye(employeManagedEntity);
 		contratRepository.save(contratManagedEntity);
