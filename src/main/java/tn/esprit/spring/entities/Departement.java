@@ -24,9 +24,10 @@ public class Departement implements Serializable {
 	private int id;
 	
 	private String name;
-	
+
 	 
 	@JsonIgnore
+
 	@ManyToMany
 	private List<Employe> employes;
 	

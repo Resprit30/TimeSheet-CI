@@ -3,7 +3,7 @@ package tn.esprit.spring.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
+
 import javax.faces.context.FacesContext;
 
 
@@ -47,37 +47,21 @@ String url="/login.xhtml?faces-redirect=true";
 	private String email;
 	private boolean actif;
 	private Role role;  
+	
 	public Role[] getRoles() { return Role.values(); }
 
 	private List<Employe> employes; 
 
-	private Integer employeIdToBeUpdated; // getter et setter
+	private Integer employeIdToBeUpdated; 
 
-
-	public String doLogin() {
-
-		String navigateTo = "null";
-		authenticatedUser=employeService.authenticate(login, password);
-		if (authenticatedUser != null && authenticatedUser.getRole() == Role.ADMINISTRATEUR) {
-			navigateTo = "/pages/admin/welcome.xhtml?faces-redirect=true";
-			loggedIn = true;
-		}		
-
-		else
-		{
-			
-			FacesMessage facesMessage =
-					new FacesMessage("Login Failed: Please check your username/password and try again.");
-			FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
-		}
-		return navigateTo;	
-	}
 
 	public String doLogout()
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	
 	return url;
+	
+
 	}
 
 
@@ -90,17 +74,19 @@ String url="/login.xhtml?faces-redirect=true";
 	}  
 
 	public String removeEmploye(int employeId) {
-		String navigateTo = "null";
+
+		
 		if (authenticatedUser==null || !loggedIn) return url;
 
 		employeService.deleteEmployeById(employeId);
-		return navigateTo; 
+		return null; 
 	} 
 
 	public String displayEmploye(Employe empl) 
 	{
-		String navigateTo = "null";
+
 		if (authenticatedUser==null || !loggedIn) return url;
+
 
 
 		this.setPrenom(empl.getPrenom());
@@ -111,24 +97,23 @@ String url="/login.xhtml?faces-redirect=true";
 		this.setPassword(empl.getPassword());
 		this.setEmployeIdToBeUpdated(empl.getId());
 
-		return navigateTo; 
+		return null; 
 
 	} 
 
 	public String updateEmploye() 
 	{ 
-		String navigateTo = "null";
 		
 		if (authenticatedUser==null || !loggedIn) return url;
 
-		employeService.addOrUpdateEmploye(new Employe(employeIdToBeUpdated, nom, prenom, email, password, actif, role)); 
 
-		return navigateTo; 
+		Employe e=new Employe( nom, prenom, email, password, actif, role);
+		e.setId(employeIdToBeUpdated);
+		employeService.addOrUpdateEmploye(e); 
+
+		return null; 
 
 	} 
-
-
-	// getters and setters 
 
 	public IEmployeService getEmployeService() {
 		return employeService;

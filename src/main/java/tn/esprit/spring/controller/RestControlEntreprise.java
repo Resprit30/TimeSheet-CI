@@ -31,8 +31,6 @@ public class RestControlEntreprise {
 	ITimesheetService itimesheetservice;
 	@Autowired
 	IDepartementService idepartementService;
-	
-	
 
 	@PostMapping("/ajouterEntreprise")
 	@ResponseBody
@@ -42,6 +40,7 @@ public class RestControlEntreprise {
 	}
 	
     @PutMapping(value = "/affecterDepartementAEntreprise/{iddept}/{identreprise}") 
+
 	public void affecterDepartementAEntreprise(@PathVariable("iddept")int depId, @PathVariable("identreprise")int entrepriseId) {
     	idepartementService.affecterDepartementAEntreprise(depId, entrepriseId);
 	}
@@ -53,7 +52,6 @@ public class RestControlEntreprise {
 		ientrepriseservice.deleteEntrepriseById(entrepriseId);
 	}
     
-    // http://localhost:8081/SpringMVC/servlet/getEntrepriseById/1
     @GetMapping(value = "getEntrepriseById/{identreprise}")
     @ResponseBody
 	public Entreprise getEntrepriseById(@PathVariable("identreprise") int entrepriseId) {
@@ -71,6 +69,7 @@ public class RestControlEntreprise {
 	}
 	
     @GetMapping(value = "getAllDepartementsNamesByEntreprise/{identreprise}")
+
     @ResponseBody
 	public List<String> getAllDepartementsNamesByEntreprise(@PathVariable("identreprise") int entrepriseId) {
 		return ientrepriseservice.getAllDepartementsNamesByEntreprise(entrepriseId);

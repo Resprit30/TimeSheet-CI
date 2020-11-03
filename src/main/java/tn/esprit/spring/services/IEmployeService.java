@@ -1,19 +1,13 @@
 package tn.esprit.spring.services;
 
-
 import java.util.List;
-
 
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 
 
 
-
 public interface IEmployeService {
-	
-	public Employe authenticate(String login, String password) ;
-	 
 	
 	public void mettreAjourEmailByEmployeId(String email, int employeId);
 	public void affecterEmployeADepartement(int employeId, int depId);

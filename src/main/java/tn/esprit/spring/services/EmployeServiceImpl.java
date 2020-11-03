@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
@@ -30,10 +29,6 @@ public class EmployeServiceImpl implements IEmployeService {
 	@Autowired
 	TimesheetRepository timesheetRepository;
 
-	@Override
-	public Employe authenticate(String login, String password) {
-		return employeRepository.getEmployeByEmailAndPassword(login, password);
-	}
 
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
@@ -44,9 +39,12 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Employe employe = employeRepository.findById(employeId).orElse(null);
+
+		if(employe!=null){
+
 		employe.setEmail(email);
 		employeRepository.save(employe);
-
+		}
 	}
 
 	@Transactional	
@@ -54,24 +52,27 @@ public class EmployeServiceImpl implements IEmployeService {
 		Departement depManagedEntity = deptRepoistory.findById(depId).orElse(null);
 		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
 
-		if(depManagedEntity.getEmployes() == null){
+	 if(depManagedEntity!=null)
+		{if( depManagedEntity.getEmployes() == null){
 
 			List<Employe> employes = new ArrayList<>();
 			employes.add(employeManagedEntity);
 			depManagedEntity.setEmployes(employes);
-		}else{
+		}
+		else
 
 			depManagedEntity.getEmployes().add(employeManagedEntity);
-		}
+		
 
-	
 		deptRepoistory.save(depManagedEntity); 
-
+		}
 	}
 	@Transactional
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
 		Departement dep = deptRepoistory.findById(depId).orElse(null);
+
+if(dep!=null){
 
 		int employeNb = dep.getEmployes().size();
 		for(int index = 0; index < employeNb; index++){
@@ -79,20 +80,24 @@ public class EmployeServiceImpl implements IEmployeService {
 				dep.getEmployes().remove(index);
 				break;
 			}
-		}
+		}}
 	} 
 
 	
 	public String getEmployePrenomById(int employeId) {
 		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
-		return employeManagedEntity.getPrenom();
+
+		
+		return employeManagedEntity!=null ?employeManagedEntity.getPrenom():null;
+
 	}
 	 
 	public void deleteEmployeById(int employeId)
 	{
 		Employe employe = employeRepository.findById(employeId).orElse(null);
 
-		
+	if(employe!=null && employe.getDepartements()!=null)
+
 		for(Departement dep : employe.getDepartements()){
 			dep.getEmployes().remove(employe);
 		}

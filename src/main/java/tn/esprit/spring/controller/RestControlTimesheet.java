@@ -32,7 +32,6 @@ public class RestControlTimesheet {
 	IMissionService imissionservice;
 	
 
-	
 	@PostMapping("/ajouterMission")
 	@ResponseBody
 	public int ajouterMission(@RequestBody Mission mission) {
@@ -40,13 +39,11 @@ public class RestControlTimesheet {
 		return mission.getId();
 	}
 
-	
 	@PutMapping(value = "/affecterMissionADepartement/{idmission}/{iddept}") 
 	public void affecterMissionADepartement(@PathVariable("idmission") int missionId, @PathVariable("iddept") int depId) {
 		imissionservice.affecterMissionADepartement(missionId, depId);
 	}
 
-	
 	@PostMapping("/ajouterTimesheet/idmission/idemp/dated/datef")
 	@ResponseBody
 	public void ajouterTimesheet(@PathVariable("idmission") int missionId, @PathVariable("idemp") int employeId, @PathVariable("dated") Date dateDebut,@PathVariable("datef") Date dateFin) {
@@ -60,6 +57,7 @@ public class RestControlTimesheet {
 	
 
     @GetMapping(value = "findAllMissionByEmployeJPQL/{idemp}")
+
     @ResponseBody
 	public List<Mission> findAllMissionByEmployeJPQL(@PathVariable("idemp") int employeId) {
 
@@ -67,6 +65,7 @@ public class RestControlTimesheet {
 	}
 
     @GetMapping(value = "getAllEmployeByMission/{idmission}")
+
     @ResponseBody
 	public List<Employe> getAllEmployeByMission(@PathVariable("idmission") int missionId) {
 

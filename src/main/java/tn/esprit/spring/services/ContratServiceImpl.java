@@ -29,13 +29,16 @@ public class ContratServiceImpl implements IContratService {
 		return contrat.getReference();
 	}
 
+
 	public void affecterContratAEmploye(int contratId, int employeId)  {
+
 		Contrat contratManagedEntity = contratRepository.findById(contratId).orElse(null);
 		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
 
+		if(contratManagedEntity!=null){
 		contratManagedEntity.setEmploye(employeManagedEntity);
 		contratRepository.save(contratManagedEntity);
-
+		}
 	}
 
 public void deleteContratById(int contratId) {

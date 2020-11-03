@@ -37,10 +37,12 @@ public class DepartementServiceImpl implements IDepartementService {
 				//Rappel : Dans une relation oneToMany le mappedBy doit etre du cote one.
 				Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).orElse(null);
 				Departement depManagedEntity = deptRepoistory.findById(depId).orElse(null);
-				
-				depManagedEntity.setEntreprise( entrepriseManagedEntity);
+
+				if(depManagedEntity!=null){
+				depManagedEntity.setEntreprise(entrepriseManagedEntity);
+
 				deptRepoistory.save(depManagedEntity);
-		
+				}
 	}
 	
 	@Transactional

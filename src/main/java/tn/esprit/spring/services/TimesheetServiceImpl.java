@@ -1,5 +1,6 @@
 package tn.esprit.spring.services;
 
+
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
@@ -53,21 +54,26 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
 		logger.info("In valider Timesheet");
+
+		
 		Employe validateur = employeRepository.findById(validateurId).orElse(null);
 		Mission mission = missionRepository.findById(missionId).orElse(null);
-		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
-			logger.info("l'employe doit etre chef de departement pour valider une feuille de temps !");
+		//verifier s'il est un chef de departement (interet des enum)
+		if(validateur!=null && !validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
+		
 			return;
 		}
 		boolean chefDeLaMission = false;
+		if(validateur!=null && validateur.getDepartements()!=null )
 		for(Departement dep : validateur.getDepartements()){
-			if(dep.getId() == mission.getDepartement().getId()){
+			if(mission !=null && mission.getDepartement() !=null && dep.getId() == mission.getDepartement().getId()){
 				chefDeLaMission = true;
 				break;
 			}
 		}
 		if(!chefDeLaMission){
 			logger.info("l'employe doit etre chef de departement de la mission en question");
+
 			return;
 		}
 //
@@ -77,6 +83,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		logger.info("dateDebut : " , dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
+
 		
 	}
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
