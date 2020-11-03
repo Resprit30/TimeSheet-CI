@@ -2,10 +2,12 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Timesheet implements Serializable{
@@ -60,6 +62,18 @@ public class Timesheet implements Serializable{
 
 	public void setEmploye(Employe employe) {
 		this.employe = employe;
+	}
+
+	public Timesheet(TimesheetPK timesheetPK, Mission mission, Employe employe, boolean isValide) {
+		super();
+		this.timesheetPK = timesheetPK;
+		this.mission = mission;
+		this.employe = employe;
+		this.isValide = isValide;
+	}
+
+	public Timesheet() {
+		
 	}
 
 	
