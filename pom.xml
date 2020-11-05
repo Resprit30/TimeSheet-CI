@@ -136,7 +136,7 @@
    		 <version>2.20</version>
     	<configuration>
         <includes>
-            <include>TimesheetTests.java</include>
+            <include>ContratServiceImplTest.java</include>
         </includes>
         <testFailureIgnore>true</testFailureIgnore>
     </configuration> 
