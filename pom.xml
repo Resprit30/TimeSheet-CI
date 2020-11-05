@@ -131,6 +131,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+    	<artifactId>maven-surefire-plugin</artifactId>
+   		 <version>2.20</version>
+    	<configuration>
+        <includes>
+            <include>DepartementServiceImplTest.java</include>
+        </includes>
+        <testFailureIgnore>true</testFailureIgnore>
+    </configuration> 
+	</plugin>
 		</plugins>
 	</build>
 
