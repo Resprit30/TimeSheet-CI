@@ -37,13 +37,13 @@ public class DepartementServiceImplTest {
 	}
 	@Test
 	public void testAjouterDepartement(){
-		/*Departement d = new Departement ("IT Dep");
+		Departement d = new Departement ("IT Dep");
 		Departement dAdded = DepService.ajouterDepartement(d);
-		assertEquals(d.getName(), dAdded.getName());*/
+		assertEquals(d.getName(), dAdded.getName());
 	}
 	@Test
 	public void testAffecterDepartementAEntreprise() {
-		/*int entrepriseId = 1 ;
+		int entrepriseId = 1 ;
 		int depId = 49;  // +1  update this id  by one each time I  run Junit test 
 		Departement Dep = deptRepoistory.findById(depId).orElse(null);
 		Entreprise Ent = entrepriseRepoistory.findById(entrepriseId).orElse(null);
@@ -51,33 +51,33 @@ public class DepartementServiceImplTest {
 		Dep.setEntreprise(Ent);
 		Departement dep = DepService.affecterDepartementAEntreprise(depId, entrepriseId);
 		Assert.assertEquals (Dep.getEntreprise().getId(),dep.getEntreprise().getId());
-		}*/
+		}
 			
 	}
 	@Test
 	public void testDesaffecterDepartementDuEntreprise () {
-		/*int entId = 1 ;
+		int entId = 1 ;
 		int depId = 48 ;//+1
 	    DepService.desaffecterDepartementDuEntreprise(depId, entId);
 	    Departement Dep = deptRepoistory.findById(depId).orElse(null);
 	    if(Dep != null){
 		assertNull (Dep.getEntreprise());
-	    }*/
+	    }
 	}
 	@Test
 	  public void testGetDepartementById(){
-		/*int depId = 49;//+1
+		int depId = 49;//+1
 		Departement dep= DepService.getDepartmentById(depId);
 		
-		assertEquals(49, dep.getId());*///+1
+		assertEquals(49, dep.getId());//+1
 	}
 	
 	
 	@Test
 	public void testDeleteDepartementById(){
-		/*int depId = 47 ;//+1
+		int depId = 47 ;//+1
 		int i = DepService.deleteDepartementById(depId);
-		assertEquals(0, i);*/
+		assertEquals(0, i);
 		
 		
 
